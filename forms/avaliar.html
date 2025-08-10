@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/forms.css">
+    <title>CARTEL - Avaliação Corporal</title>
+</head>
+
+<body>
+
+    <div class="left-section">
+
+        <a href="../index.html">
+            <i class='bx bx-home-alt-2'></i>
+        </a>
+
+        <a href="forms.html" class="selected">
+            <i class='bx bx-file'></i>
+        </a>
+
+        <a href="ai.html">
+            <i class='bx bx-bowl-rice'></i>
+        </a>
+
+        <a href="../dados.html">
+            <i class='bx bx-data'></i>
+        </a>
+
+    </div>
+
+    <main>
+        <!--Aqui será feito o formulário das avaliações-->
+        <form action="../acoes/salvarAvl.php" method="post">
+
+            <label>
+                Nome
+                <input type="text" name="nome_avaliacao" id="nome_avaliacao" value="" required>
+            </label>
+
+
+            <label>
+                Peso
+                <input type="number" name="peso_avaliacao" step="0.01" id="peso_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Peitoral
+                <input type="number" name="peito_avaliacao" step="0.01" id="peito_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Braço Esq
+                <input type="number" name="braco_esq_avaliacao" step="0.01" id="braco_esq_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Braço Dir
+                <input type="number" name="braco_dir_avaliacao" step="0.01" id="braco_dir_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Cintura
+                <input type="number" name="cintura_avaliacao" step="0.01" id="cintura_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Abdômen
+                <input type="number" name="abdomen_avaliacao" step="0.01" id="abdomen_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Quadril
+                <input type="number" name="quadril_avaliacao" step="0.01" id="quadril_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Coxa Esq
+                <input type="number" name="coxa_esq_avaliacao" step="0.01" id="coxa_esq_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Coxa Dir
+                <input type="number" name="coxa_dir_avaliacao" step="0.01" id="coxa_dir_avaliacao" min="0" required>
+            </label>
+
+
+            <label>
+                Panturrilha Esq
+                <input type="number" name="panturrilha_esq_avaliacao" step="0.01" id="panturrilha_esq_avaliacao" min="0">
+            </label>
+
+
+            <label>
+                Panturrilha Dir
+                <input type="number" name="panturrilha_dir_avaliacao" step="0.01" id="panturrilha_dir_avaliacao" min="0">
+            </label>
+
+
+            <label>
+                Objetivo
+                <small>Não obrigatório</small>
+                <input type="text" name="objetivo_avaliacao" id="objetivo_avaliacao">
+            </label>
+
+
+            <label>
+                Data
+                <input type="date" name="data_avaliacao" id="data_avaliacao" required>
+            </label>
+
+            <button name="submit_avaliacao">Enviar</button>
+
+        </form>
+
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

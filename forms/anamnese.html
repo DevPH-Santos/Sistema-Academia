@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/forms.css">
+    <title>CARTEL - Ficha de Anamnese</title>
+</head>
+
+<body>
+    <div class="left-section">
+
+        <a href="../index.html">
+            <i class='bx bx-home-alt-2'></i>
+        </a>
+
+        <a href="forms.html" class="selected">
+            <i class='bx bx-file'></i>
+        </a>
+
+        <a href="ai.html">
+            <i class='bx bx-bowl-rice'></i>
+        </a>
+
+        <a href="../dados.html">
+            <i class='bx bx-data'></i>
+        </a>
+
+    </div>
+
+    <main>
+
+        <form action="../acoes/salvarAnamnese.php" method="post">
+
+            <label for="nome">
+                Nome
+                <input type="text" id="nome" name="nome" required autocomplete="off" placeholder="Digite seu nome">
+            </label>
+        
+            <label for="idade">
+                Idade
+                <input type="number" id="idade" name="idade" min="0" required placeholder="Digite sua idade">
+            </label>
+        
+            <label for="ja_treinou">
+                Já treinou antes?
+                <select id="ja_treinou" name="ja_treinou" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </label>
+        
+            <label for="tempo_treinando">
+                Treina há quanto tempo?
+                <input type="text" id="tempo_treinando" name="tempo_treinando" required placeholder="Ex: 6 meses">
+            </label>
+        
+            <label for="tempo_sem_atividade">
+                Tempo sem atividade física?
+                <input type="text" id="tempo_sem_atividade" name="tempo_sem_atividade" required placeholder="Ex: 1 ano">
+            </label>
+        
+            <label for="objetivo">
+                Objetivo
+                <input type="text" id="objetivo" name="objetivo" required placeholder="Ex: Emagrecimento, ganho de massa">
+            </label>
+        
+            <label for="frequencia_semanal">
+                Frequência semanal
+                <input type="number" id="frequencia_semanal" name="frequencia_semanal" min="0" required placeholder="Ex: 3">
+            </label>
+        
+            <label for="tempo_treino_por_dia">
+                Tempo de treino por dia (em minutos)
+                <input type="number" id="tempo_treino_por_dia" name="tempo_treino_por_dia" min="0" required placeholder="Ex: 60">
+            </label>
+        
+            <label for="doenca_problema_saude">
+                Doença/Problema de saúde?
+                <input type="text" id="doenca_problema_saude" name="doenca_problema_saude" required autocomplete="off" placeholder="Descreva se houver">
+            </label>
+        
+            <label for="limitacao_movimento">
+                Limitação de movimento?
+                <input type="text" id="limitacao_movimento" name="limitacao_movimento" required autocomplete="off" placeholder="Descreva se houver">
+            </label>
+        
+            <label for="dor_em_movimento">
+                Dor em algum movimento?
+                <input type="text" id="dor_em_movimento" name="dor_em_movimento" required autocomplete="off" placeholder="Descreva se houver">
+            </label>
+        
+            <label for="cirurgias">
+                Cirurgias?
+                <input type="text" id="cirurgias" name="cirurgias" required autocomplete="off" placeholder="Descreva se houver">
+            </label>
+        
+            <label for="medicamento_controlado">
+                Medicamento controlado?
+                <input type="text" id="medicamento_controlado" name="medicamento_controlado" required autocomplete="off" placeholder="Descreva se houver">
+            </label>
+        
+            <label for="dieta">
+                Está fazendo dieta?
+                <select id="dieta" name="dieta" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </label>
+        
+            <label for="consumo_alcool">
+                Consumo de álcool?
+                <select id="consumo_alcool" name="consumo_alcool" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </label>
+        
+            <label for="fuma">
+                Fuma?
+                <select id="fuma" name="fuma" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </label>
+        
+            <button name="submit_anamnese">Enviar</button>
+        
+        </form>
+
+    </main>
+
+</body>
+
+</html>

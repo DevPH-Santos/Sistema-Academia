@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/forms.css">
+    <title>CARTEL - Bioimpedancia</title>
+</head>
+
+<body>
+
+    <div class="left-section">
+
+        <a href="../index.html">
+            <i class='bx bx-home-alt-2'></i>
+        </a>
+
+        <a href="forms.html" class="selected">
+            <i class='bx bx-file'></i>
+        </a>
+
+        <a href="ai.html">
+            <i class='bx bx-bowl-rice'></i>
+        </a>
+
+        <a href="../dados.html">
+            <i class='bx bx-data'></i>
+        </a>
+
+    </div>
+
+    <main>
+        <!--Aqui será feito o formulário das avaliações-->
+        <form action="../acoes/salvarBioimpedancia.php" method="post">
+
+            <label>
+                Nome
+                <input name="nome" type="text" required>
+            </label>
+
+            <label>
+                Data
+                <input name="data" type="date" required>
+            </label>
+
+            <label>
+                Idade
+                <input name="idade" id="idade" type="number" required>
+            </label>
+
+            <label>
+                Tríceps
+                <input name="triceps" id="triceps" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Peito
+                <input name="peito" id="peito" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Axilar média
+                <input name="axilar_media" id="axilar_media" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Subescapular
+                <input name="subescapular" id="subescapular" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Abdominal
+                <input name="abdominal" id="abdominal" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Supra iliaca
+                <input name="supra_iliaca" id="supra_iliaca" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Coxa
+                <input name="coxa" id="coxa" type="number" autocomplete="off" required>
+            </label>
+
+            <label>
+                Peso
+                <input name="peso" id="peso" type="text" autocomplete="off" required>
+            </label>
+
+            <label>
+                % Gordura Corporal
+                <input name="gordura_corporal" id="gordura_corporal" type="text" autocomplete="off" required>
+            </label>
+
+            <label>
+                Massa gorda
+                <input name="massa_gorda" id="massa_gorda" type="text" autocomplete="off" required>
+            </label>
+
+            <label>
+                Massa magra
+                <input name="massa_magra" id="massa_magra" type="text" autocomplete="off" required>
+            </label>
+
+            <button name="submit_bioimpedancia">Enviar</button>
+
+        </form>
+
+    </main>
+
+    <script>
+        const pesoInput = document.getElementById('peso');
+        const gorduraInput = document.getElementById('gordura_corporal');
+        const massaGordaInput = document.getElementById('massa_gorda');
+        const massaMagraInput = document.getElementById('massa_magra');
+
+        const triceps = document.getElementById('triceps');
+        const peito = document.getElementById('peito');
+        const axilar = document.getElementById('axilar_media');
+        const subescapular = document.getElementById('subescapular');
+        const abdominal = document.getElementById('abdominal');
+        const supra = document.getElementById('supra_iliaca');
+        const coxa = document.getElementById('coxa');
+
+        // Idade fixa ou coletada depois (coloque sua lógica para idade real aqui se quiser)
+        const idade = document.getElementById('idade');
+
+        function calcularTudo() {
+            const peso = parseFloat(pesoInput.value.replace(',', '.'));
+            const idadeValor = parseFloat(idade.value);
+
+            const d1 = parseFloat(triceps.value);
+            const d2 = parseFloat(peito.value);
+            const d3 = parseFloat(axilar.value);
+            const d4 = parseFloat(subescapular.value);
+            const d5 = parseFloat(abdominal.value);
+            const d6 = parseFloat(supra.value);
+            const d7 = parseFloat(coxa.value);
+
+            if (
+                !isNaN(d1) && !isNaN(d2) && !isNaN(d3) &&
+                !isNaN(d4) && !isNaN(d5) && !isNaN(d6) && !isNaN(d7) && !isNaN(idadeValor)
+            ) {
+                const somaDobras = d1 + d2 + d3 + d4 + d5 + d6 + d7;
+                const densidade = 1.097 - 0.0004708 * somaDobras + 0.00000056 * Math.pow(somaDobras, 2) - 0.00012828 * idadeValor;
+                const gordura = (495 / densidade) - 450;
+
+                gorduraInput.value = gordura.toFixed(2).replace('.', ',');
+
+                if (!isNaN(peso)) {
+                    const massaGorda = (gordura / 100) * peso;
+                    const massaMagra = peso - massaGorda;
+
+                    massaGordaInput.value = massaGorda.toFixed(2).replace('.', ',');
+                    massaMagraInput.value = massaMagra.toFixed(2).replace('.', ',');
+                }
+            }
+        }
+
+        [triceps, peito, axilar, subescapular, abdominal, supra, coxa, pesoInput, idade].forEach(input => {
+            input.addEventListener('input', calcularTudo);
+        });
+
+    </script>
+
+</body>
+
+</html>

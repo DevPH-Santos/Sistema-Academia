@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tabela.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <title>Cartel - Ferramenta AI</title>
+</head>
+
+<body>
+
+    <div class="left-section">
+
+        <a href="../index.html">
+            <i class='bx bx-home-alt-2'></i>
+        </a>
+
+        <a href="forms.html" class="selected">
+            <i class='bx bx-file'></i>
+        </a>
+
+        <a href="ai.html" class="">
+            <i class='bx bx-bowl-rice'></i>
+        </a>
+
+        <a href="../dados.html">
+            <i class='bx bx-data'></i>
+        </a>
+
+    </div>
+
+    <main>
+
+        <form id="treinoForm">
+
+            <label>
+                Nome
+                <input type="text" id="nome_treino" name="nome_treino">
+            </label>
+
+            <label>
+                Objetivo
+                <select id="objetivo_treino" name="objetivo_treino">
+                    <option value="ganho_massa_muscular">Ganho de massa muscular</option>
+                    <option value="resistencia">Resistência</option>
+                    <option value="condicionamento">Condicionamento Geral</option>
+                </select>
+            </label>
+
+            <label>
+                Parte do corpo
+                <select id="musculo_treino" name="musculo_treino">
+                    <option value="corpo_inteiro">Corpo Inteiro</option>
+                    <option value="perna">Pernas</option>
+                    <option value="braco">Braço</option>
+                    <option value="abdomen">Abdômen</option>
+                </select>
+            </label>
+
+            <label>
+                Nivel
+                <select id="nivel_treino" name="nivel_treino">
+                    <option value="iniciante">Iniciante</option>
+                    <option value="intermediario">Intermediário</option>
+                    <option value="avancado">Avançado</option>
+                </select>
+            </label>
+
+            <label>
+                Dias disponíveis
+                <select id="dias_treino" required>
+                    <option value="1">1 dia disponível</option>
+                    <option value="2">2 dias disponíveis</option>
+                    <option value="3">3 dias disponíveis</option>
+                    <option value="4">4 dias disponíveis</option>
+                    <option value="5">5 dias disponíveis</option>
+                    <option value="6">6 dias disponíveis</option>
+                    <option value="7">7 dias disponíveis</option>
+                </select>
+                <!--<input type="number" id="dias_treino" name="dias_treino" required placeholder="5">-->
+            </label>
+
+            <label>
+                Quantidade de exercicios
+                <select id="qtd_exercicios_treino" required>
+                    <option value="1">1 exercício</option>
+                    <option value="2">2 exercícios</option>
+                    <option value="3">3 exercícios</option>
+                    <option value="4">4 exercícios</option>
+                    <option value="5">5 exercícios</option>
+                </select>
+            </label>
+
+            <button type="submit" id="gerar">Gerar Treino</button>
+
+        </form>
+
+        <button onclick="gerarPdf()"><i class='bx bxs-download'></i></button>
+
+        <div id="result_treino">
+
+        </div>
+
+    </main>
+
+    <script src="../js/treino.js"></script>
+
+</body>
+
+</html>

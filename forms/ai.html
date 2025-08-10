@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tabela.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <title>Cartel - Ferramenta AI</title>
+</head>
+
+<body>
+
+    <div class="left-section">
+
+        <a href="../index.html">
+            <i class='bx bx-home-alt-2'></i>
+        </a>
+
+        <a href="forms.html" class="">
+            <i class='bx bx-file'></i>
+        </a>
+
+        <a href="ai.html" class="selected">
+            <i class='bx bx-bowl-rice'></i>
+        </a>
+
+        <a href="../dados.html">
+            <i class='bx bx-data'></i>
+        </a>
+
+    </div>
+
+    <main>
+
+        <form id="dietForm">
+
+            <div class="radio-inputs">
+
+
+                <label>
+                    <input class="radio-input" id="sexoFeminino" value="Feminino" name="sexo" type="radio" required>
+                    <span class="radio-tile">
+                        <i class='bx bx-male'></i>
+                        <span class="radio-label">Feminino</span>
+                    </span>
+                </label>
+
+                <label>
+                    <input class="radio-input" id="sexoMasculino" name="sexo" value="Masculino" type="radio" required>
+                    <span class="radio-tile">
+                        <i class='bx bx-male'></i>
+                        <span class="radio-label">Masculino</span>
+                    </span>
+                </label>
+
+            </div>
+
+            <label>
+                Idade
+                <input type="number" id="idade" name="idade" required>
+            </label>
+
+            <label>
+                Peso
+                <input type="number" id="peso" name="peso" required placeholder="kg">
+            </label>
+
+            <label>
+                Altura
+                <input type="number" id="altura" name="altura" required placeholder="cm">
+            </label>
+
+            <label>
+                Nível de Atividade Física
+                <select id="nivelAtividade" name="nivelAtividade" required>
+                    <option value="sedentario">Sedentário (Nenhuma atividade)</option>
+                    <option value="leve">Leve (1-2 dias/semana)</option>
+                    <option value="moderado">Moderado (3-5 dias/semana)</option>
+                    <option value="intenso">Intenso (6-7 dias/semana)</option>
+                    <option value="atleta">Atleta (2x por dia)</option>
+                </select>
+            </label>
+
+            <label>
+                Objetivo
+                <select id="objetivo">
+                    <option value="perder">Perder Peso</option>
+                    <option value="manter">Manter Peso</option>
+                    <option value="ganhar">Ganhar Peso</option>
+                </select>
+            </label>
+
+            <label>
+                <input type="checkbox" id="editarMacros"> Editar macros manualmente
+            </label>
+
+            <div id="macrosPersonalizados" style="display: none; margin-bottom: 20px;">
+                <label>
+                    Proteína (g)
+                    <input type="number" id="proteinaManual" min="0" placeholder="Ex: 200">
+                </label>
+
+                <label>
+                    Gordura (g)
+                    <input type="number" id="gorduraManual" min="0" placeholder="Ex: 100">
+                </label>
+
+                <label>
+                    Carboidrato (g)
+                    <input type="number" id="carboManual" min="0" placeholder="Ex: 250">
+                </label>
+            </div>
+
+            <button type="submit" id="gerar">Gerar Dieta Personalizada</button>
+        </form>
+
+
+
+        <div id="result"></div>
+        <div class="macros" id="macros"></div>
+        <div id="resultadosMacros" style="margin-top: 20px;"></div>
+        <div id="dieta"></div>
+
+    </main>
+
+    <script src="../js/ai.js"></script>
+
+    <script>
+        document.getElementById('editarMacros').addEventListener('change', function () {
+            const campos = document.getElementById('macrosPersonalizados');
+            campos.style.display = this.checked ? 'block' : 'none';
+        });
+    </script>
+
+</body>
+
+</html>
