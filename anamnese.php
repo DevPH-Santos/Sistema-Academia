@@ -46,13 +46,9 @@ if (!$result) {
             <input type="text" id="searchInputProgress" placeholder="Pesquisar progressos..."
                 onkeyup="searchProgress();">
 
-            <table id="progressTable">
+            <table id="progressTable" class="name-list">
                 <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Ver mais</th>
-                        <th>...</th>
-                    </tr>
+                    <tr><th>Nome do aluno</th></tr>
                 </thead>
                 <tbody>
                     <?php
@@ -79,18 +75,12 @@ if (!$result) {
 
                             $mensagem_url = urlencode($mensagem); // Codifica a mensagem para a URL
 
-                            echo "<tr>
-                                <td>{$row['nome']}</td>
-                                <td><a href='vermaisAnam.php?nome=" . urlencode($row['nome']) . "'>Ver mais</a></td>
-                                <td>
-                                    <a class='btn-share' href='https://api.whatsapp.com/send?text={$mensagem_url}' target='_blank'>
-                                        <i class='bx bx-share'></i>
-                                    </a>
-                                </td>
-                            </tr>";
+                            $registro_json = htmlspecialchars(json_encode($row, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP), ENT_QUOTES, 'UTF-8');
+                            $nome_html = htmlspecialchars($row['nome'], ENT_QUOTES, 'UTF-8');
+                            echo "<tr><td><button type='button' class='name-record' data-record='{$registro_json}'>{$nome_html}</button></td></tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='3'>Nenhum dado encontrado</td></tr>";
+                        echo "<tr><td>Nenhum dado encontrado</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -100,7 +90,29 @@ if (!$result) {
 
     </main>
 
+    <div class="record-modal" id="recordModal" aria-hidden="true">
+        <section class="record-dialog" role="dialog" aria-modal="true" aria-labelledby="recordTitle">
+            <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
+            <p class="modal-eyebrow">Ficha de anamnese</p><h2 id="recordTitle"></h2>
+            <div class="record-grid" id="recordDetails"></div>
+        </section>
+    </div>
+
     <script src="js/script.js"></script>
+    <script>
+        const modal = document.getElementById('recordModal');
+        const labels = {idade:'Idade', ja_treinou:'Já treinou?', tempo_treinando:'Tempo de treino', objetivo:'Objetivo', frequencia_semanal:'Frequência semanal', tempo_treino_por_dia:'Tempo de treino por dia', doenca_problema_saude:'Problemas de saúde', limitacao_movimento:'Limitações de movimento', dor_em_movimento:'Dores durante movimentos', cirurgias:'Cirurgias', medicamento_controlado:'Medicamentos', dieta:'Segue dieta?', consumo_alcool:'Consumo de álcool', fuma:'Fuma?'};
+        document.querySelectorAll('.name-record').forEach(button => button.addEventListener('click', () => {
+            const record = JSON.parse(button.dataset.record);
+            document.getElementById('recordTitle').textContent = record.nome;
+            document.getElementById('recordDetails').innerHTML = Object.entries(labels).map(([key,label]) => `<article class="record-field"><span>${label}</span><strong>${record[key] || '—'}</strong></article>`).join('');
+            modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false');
+        }));
+        modal.querySelector('.modal-close').addEventListener('click', closeRecordModal);
+        modal.addEventListener('click', event => { if (event.target === modal) closeRecordModal(); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') closeRecordModal(); });
+        function closeRecordModal(){ modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); }
+    </script>
 
 </body>
 

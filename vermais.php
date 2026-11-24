@@ -95,6 +95,7 @@ if (!$result) {
                 <tbody>
                     <?php
                     while ($user_data = mysqli_fetch_assoc($result)) {
+                        $registro_json = htmlspecialchars(json_encode($user_data, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP), ENT_QUOTES, 'UTF-8');
                         $mensagem = "Protocolo projeto assimetria: " . $user_data['nome_avaliacao'] . "\n"
                             . "Data: " . $user_data['data_avaliacao'] . "\n"
                             . "Peso: " . $user_data['peso_avaliacao'] . " kg\n"
@@ -112,7 +113,7 @@ if (!$result) {
 
                         $mensagem_url = urlencode($mensagem);
 
-                        echo "<tr>";
+                        echo "<tr class='record-row' data-record='{$registro_json}'>";
                         echo "<td>" . $user_data['nome_avaliacao'] . "</td>";
                         echo "<td>" . date("d-m-Y", strtotime($user_data['data_avaliacao'])) . "</td>";
                         echo "<td>" . $user_data['peso_avaliacao'] . "</td>";
@@ -178,9 +179,34 @@ if (!$result) {
 
     </main>
 
+    <div class="record-modal" id="recordModal" aria-hidden="true">
+        <section class="record-dialog" role="dialog" aria-modal="true" aria-labelledby="recordTitle">
+            <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
+            <p class="modal-eyebrow">Registro de avaliação</p><h2 id="recordTitle"></h2>
+            <div class="record-grid" id="recordDetails"></div>
+        </section>
+    </div>
+
     <script src="js/script.js"></script>
 
     <script>
+        const recordModal = document.getElementById('recordModal');
+        const recordLabels = {data_avaliacao:'Data', peso_avaliacao:'Peso (kg)', peito_avaliacao:'Peitoral (cm)', braco_esq_avaliacao:'Braço esquerdo (cm)', braco_dir_avaliacao:'Braço direito (cm)', cintura_avaliacao:'Cintura (cm)', abdomen_avaliacao:'Abdômen (cm)', quadril_avaliacao:'Quadril (cm)', coxa_esq_avaliacao:'Coxa esquerda (cm)', coxa_dir_avaliacao:'Coxa direita (cm)', panturrilha_esq_avaliacao:'Panturrilha esquerda (cm)', panturrilha_dir_avaliacao:'Panturrilha direita (cm)', objetivo_avaliacao:'Objetivo'};
+        document.querySelectorAll('.record-row').forEach(row => row.addEventListener('click', event => {
+            if (event.target.closest('a, button')) return;
+            const record = JSON.parse(row.dataset.record);
+            document.getElementById('recordTitle').textContent = record.nome_avaliacao;
+            document.getElementById('recordDetails').innerHTML = Object.entries(recordLabels).map(([key,label]) => {
+                const value = record[key] || '—';
+                return `<article class="record-field"><span>${label}</span><strong>${key === 'data_avaliacao' && value !== '—' ? new Date(`${value}T00:00:00`).toLocaleDateString('pt-BR') : value}</strong></article>`;
+            }).join('');
+            recordModal.classList.add('is-open'); recordModal.setAttribute('aria-hidden','false');
+        }));
+        recordModal.querySelector('.modal-close').addEventListener('click', closeRecordModal);
+        recordModal.addEventListener('click', event => { if (event.target === recordModal) closeRecordModal(); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') closeRecordModal(); });
+        function closeRecordModal(){ recordModal.classList.remove('is-open'); recordModal.setAttribute('aria-hidden','true'); }
+
         const ctx = document.getElementById('graficoBio').getContext('2d');
 
         const grafico = new Chart(ctx, {

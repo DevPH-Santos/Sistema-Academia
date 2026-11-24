@@ -84,3 +84,57 @@ main img{
     background-color: #691f1f;
     z-index: 2; 
 }
+
+@media (max-width: 600px) {
+    body {
+        min-height: 100vh;
+        height: auto;
+        flex-direction: column;
+        padding-bottom: 68px;
+    }
+
+    .left-section {
+        position: fixed;
+        z-index: 1000;
+        inset: auto 0 0;
+        width: 100%;
+        height: 64px;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0;
+        box-shadow: 0 -2px 12px rgba(0, 0, 0, .08);
+    }
+
+    .left-section a {
+        font-size: 22px;
+        padding: 10px 14px;
+    }
+
+    main {
+        min-height: calc(100vh - 64px);
+        height: auto;
+        width: 100%;
+        padding: 24px 16px;
+    }
+
+    main img {
+        width: min(100%, 400px);
+        height: auto;
+    }
+
+    .linksform {
+        margin-top: 24px;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .linksform a { padding: 10px 16px; }
+}
+
+/* Página de escolha de formulário */
+main > h1 { width: 100%; text-align: center; }
+
+@media (max-width: 600px) {
+    main > h1 { font-size: clamp(1.45rem, 6vw, 2rem); }
+}
